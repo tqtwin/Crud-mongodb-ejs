@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="icon" type="image/png" href="../IMG/bookstore-icon.jfif">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <script> function confirmDeletion(userId) {
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
+            window.location.href = '/delete/' + userId;
+        }
+    }</script>
+    <div class="container">
+        <h1>User List</h1>
+        <a href="/add" class="btn btn-primary mb-3">Thêm người dùng</a>
+        <div class="table-responsive-sm">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Giới tính</th>
+                        <th>Tuổi</th>
+                        <th>Điểm Toán</th>
+                        <th>Điểm Lý</th>
+                        <th>Điểm Hóa</th>
+                        <th>Xử lý</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i = 0; i < users.length; i++) { %>
+                    <tr>
+                        <td><%= users[i].name %></td>
+                        <td><%= users[i].gender %></td>
+                        <td><%= users[i].age %></td>
+                        <td><%= users[i].mathScore %></td>
+                        <td><%= users[i].physicsScore %></td>
+                        <td><%= users[i].chemistryScore %></td>
+
+                        <td>
+                            <a href="/<%= users[i]._id %>" class="btn btn-primary btn-sm" style="width:80px; margin-right: 5px;">Chi tiết</a>
+                            <a href="/edit/<%= users[i]._id%>" class="btn btn-secondary btn-sm" style="width:80px;">Sửa</a>
+                            <a href="javascript:void(0);" onclick="confirmDeletion('<%= users[i]._id %>')" class="btn btn-danger btn-sm" style="width:80px;">Xóa</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
